@@ -1,0 +1,234 @@
+db.products.insertMany([
+  { "category": "Phone", "brand": "Apple", "model": "iPhone 13", "os": "iOS", "price": 999 },
+  { "category": "Phone", "brand": "Samsung", "model": "Galaxy S22", "os": "Android", "price": 899 },
+  { "category": "Phone", "brand": "Google", "model": "Pixel 6", "os": "Android", "price": 799 },
+  { "category": "Phone", "brand": "OnePlus", "model": "OnePlus 10 Pro", "os": "Android", "price": 850 },
+  { "category": "Phone", "brand": "Xiaomi", "model": "Mi 12", "os": "Android", "price": 750 },
+
+  { "category": "TV", "brand": "LG", "screen_size": "65 inches", "resolution": "4K", "smart_tv": true, "price": 1300 },
+  { "category": "TV", "brand": "Sony", "screen_size": "55 inches", "resolution": "4K", "smart_tv": true, "price": 1100 },
+  { "category": "TV", "brand": "Samsung", "screen_size": "75 inches", "resolution": "8K", "smart_tv": true, "price": 2500 },
+  { "category": "TV", "brand": "TCL", "screen_size": "50 inches", "resolution": "4K", "smart_tv": true, "price": 700 },
+  { "category": "TV", "brand": "Vizio", "screen_size": "60 inches", "resolution": "4K", "smart_tv": false, "price": 800 },
+
+  { "category": "Smart Watch", "brand": "Apple", "model": "Apple Watch Series 8", "features": ["Heart Rate Monitor", "GPS"], "price": 550 },
+  { "category": "Smart Watch", "brand": "Samsung", "model": "Galaxy Watch 5", "features": ["ECG", "Sleep Tracking"], "price": 400 },
+  { "category": "Smart Watch", "brand": "Garmin", "model": "Forerunner 945", "features": ["GPS", "VO2 Max"], "price": 500 },
+  { "category": "Smart Watch", "brand": "Fitbit", "model": "Versa 4", "features": ["Step Tracking", "Sleep Monitoring"], "price": 250 },
+  { "category": "Smart Watch", "brand": "Huawei", "model": "Watch GT 3", "features": ["SpO2", "AI Trainer"], "price": 350 },
+
+  { "category": "Laptop", "brand": "Apple", "model": "MacBook Air M2", "ram": "16GB", "storage": "512GB SSD", "price": 1400 },
+  { "category": "Laptop", "brand": "Dell", "model": "XPS 13", "ram": "16GB", "storage": "1TB SSD", "price": 1600 },
+  { "category": "Laptop", "brand": "HP", "model": "Spectre x360", "ram": "16GB", "storage": "512GB SSD", "price": 1500 },
+  { "category": "Laptop", "brand": "Lenovo", "model": "ThinkPad X1 Carbon", "ram": "32GB", "storage": "1TB SSD", "price": 1800 },
+  { "category": "Laptop", "brand": "Asus", "model": "ROG Zephyrus G15", "ram": "32GB", "storage": "2TB SSD", "price": 2000 }
+]);
+
+db.products.updateMany({"category" : { $in: ["Phone", "Smart Watch"] } }, 
+						{ $mul: { price: 1.05 }, $set: {warranty: "2 years" } });
+
+db.orders.insertMany([
+    {
+        "order_number" : 1,
+        "date" : new ISODate("2025-03-15"),
+        "customer" : {
+            "name" : "Olena",
+            "surname" : "Shevchenko",
+            "phones" : [9876549, 1234568],
+            "address" : "Kiev, Lva Tolstoho 8, UA"
+        },
+        "payment" : {
+            "card_owner" : "Olena Shevchenko",
+            "cardId" : 98765432
+        },
+        "items_id" : [
+            ObjectId("67dab6d50526f82bd9235222"),
+            ObjectId("67dab6d50526f82bd923522c")
+        ]
+    },
+    {
+        "order_number" : 2,
+        "date" : new ISODate("2025-03-16"),
+        "customer" : {
+            "name" : "Yuriy",
+            "surname" : "Dovzhenko",
+            "phones" : [9876540, 1234560],
+            "address" : "Lviv, Chornovola 12, UA"
+        },
+        "payment" : {
+            "card_owner" : "Yuriy Dovzhenko",
+            "cardId" : 12398765
+        },
+        "items_id" : [
+            ObjectId("67dab6d50526f82bd9235222")
+        ]
+    },
+	    {
+        "order_number": 3,
+        "date": new ISODate("2025-03-15"),
+        "customer": {
+            "name": "Maria",
+            "surname": "Koval",
+            "phones": [9876541, 1234500],
+            "email": "maria.koval@example.com",
+            "address": "Lviv, Franka 23, UA"
+        },
+        "payment": {
+            "card_owner": "Maria Koval",
+            "cardId": 99887766,
+            "payment_method": "Credit Card"
+        },
+        "items_id": [
+            ObjectId("67dab6d50526f82bd9235227")
+        ],
+        "status": "Shipped"
+    },
+    {
+        "order_number": 4,
+        "date": new ISODate("2025-03-20"),
+        "customer": {
+            "name": "Oleg",
+            "surname": "Demyanov",
+            "phones": [9543214, 1209876],
+            "email": "oleg.demyanov@example.com",
+            "address": "Odessa, Deribasovska 5, UA"
+        },
+        "payment": {
+            "card_owner": "Oleg Demyanov",
+            "cardId": 11223344,
+            "payment_method": "PayPal"
+        },
+        "items_id": [
+            ObjectId("67dab6d50526f82bd9235231"),
+            ObjectId("67dab6d50526f82bd9235228")
+        ],
+        "status": "Processing",
+        "delivery_type": "Express"
+    },
+    {
+        "order_number": 5,
+        "date": new ISODate("2025-03-18"),
+        "customer": {
+            "name": "Dmytro",
+            "surname": "Shevchenko",
+            "phones": [9870001, 1478523],
+            "email": "dmytro.shevchenko@example.com",
+            "address": "Dnipro, Pushkina 10, UA"
+        },
+        "payment": {
+            "card_owner": "Dmytro Shevchenko",
+            "cardId": 77665544,
+            "payment_method": "Bank Transfer"
+        },
+        "items_id": [
+            ObjectId("67dab6d50526f82bd9235227"),
+            ObjectId("67dab6d50526f82bd9235232"),
+            ObjectId("67dab6d50526f82bd9235222")
+        ],
+        "status": "Delivered",
+        "discount": 5
+    },
+    {
+        "order_number": 6,
+        "date": new ISODate("2025-03-20"),
+        "customer": {
+            "name": "Svitlana",
+            "surname": "Petryk",
+            "phones": [5556667, 9873321],
+            "email": "svitlana.petryk@example.com",
+            "address": "Kyiv, Khreshchatyk 1, UA"
+        },
+        "payment": {
+            "card_owner": "Svitlana Petryk",
+            "cardId": 44332211,
+            "payment_method": "Apple Pay"
+        },
+        "items_id": [
+            ObjectId("67dab6d50526f82bd923522e")
+        ],
+        "status": "Pending Payment",
+        "notes": "Customer requested gift wrapping."
+    }
+]);
+
+// culculate total_sum
+db.orders.find().forEach(order => {
+    let totalPrice = 0;
+    order.items_id.forEach(productId => {
+        let product = db.products.findOne({ _id: productId });
+        if (product) totalPrice += product.price;
+    });
+    db.orders.updateOne(
+        { _id: order._id },
+        { $set: { total_sum: totalPrice } }
+    );
+});
+
+
+let newProductId = ObjectId("67dab6d50526f82bd923522e");
+
+let newProduct = db.products.findOne({ _id: newProductId });
+let newPrice = newProduct ? newProduct.price : 0;
+
+db.orders.updateMany(
+    { items_id: ObjectId("67dab6d50526f82bd9235227") }, 
+    {
+        $push: { items_id: newProductId },   
+        $inc: { total_sum: newPrice }   
+    }
+);
+
+db.orders.find(
+    { total_sum: { $gt: 2500 } },  
+    { "customer": 1, "payment": 1, "_id": 0 } 
+);
+
+
+db.orders.aggregate([
+  {
+    $match: { "customer.name": "Olena", "customer.surname": "Shevchenko" } 
+  },
+  {
+    $lookup: {
+      from: "products",
+      localField: "items_id",
+      foreignField: "_id",
+      as: "ordered_products"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      order_number: 1,
+      date: 1,
+      "customer.name": 1,
+      "customer.surname": 1,
+      "customer.phones": 1,
+      "customer.address": 1,
+      ordered_products: 1
+    }
+  }
+]);
+
+db.createCollection("reviews", {
+    capped: true, 
+    size: 5120,  
+    max: 5     
+});
+
+db.reviews.insertMany([
+  { user_id: 1, product_id: ObjectId("67dab6d50526f82bd9235222"), review: "Excellent phone!" },
+  { user_id: 2, product_id: ObjectId("67dab6d50526f82bd9235222"), review: "Great camera quality." },
+  { user_id: 3, product_id: ObjectId("67dab6d50526f82bd9235227"), review: "Lightweight and powerful." },
+  { user_id: 4, product_id: ObjectId("67dab6d50526f82bd9235232"), review: "Perfect." },
+  { user_id: 5, product_id: ObjectId("67dab6d50526f82bd923522e"), review: "Amazing!" }
+]);
+
+db.reviews.insertOne({ user_id: 6, product_id: ObjectId("67dab6d50526f82bd923522c"), review: "Excellent." });
+
+db.replicaSetTest.insertOne({ message: "Message 6"});
+db.replicaSetTest.insertOne({ message: "Message 10"}, { writeConcern: { w: 1 , wtimeout: 5000}});
+db.collection.find(
+  { },
+  { readConcern: { level: "majority" } }  
+);
