@@ -1,10 +1,8 @@
 import time
-import warnings
 import configparser
 import logging
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
-from typing import LiteralString
 
 from bson import ObjectId
 from pymongo import MongoClient, WriteConcern
